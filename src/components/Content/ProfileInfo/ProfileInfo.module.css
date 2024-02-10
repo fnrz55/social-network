@@ -1,0 +1,63 @@
+.profile{
+  width: 280px;
+  height: 290px;
+  margin-left: 50px;
+  background: white;
+}
+ .backgroundCont{
+  position: relative;
+ }
+  .background img{
+    
+    height: 120px;
+    width: 100%;
+  }
+  .avatarPic img{
+  position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    top: 50%;
+    left: 30%;
+  }
+  .container{
+    margin-top: 50px;
+    background: white;
+  }
+ 
+  .name{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 900;
+    padding-top: 5px;
+    margin-bottom: 10px;
+  }
+  .descriptipon{
+    text-align: center;
+    font-size: 10px;
+  }
+  .descriptipon p{
+    margin-top: 0px;
+    margin-bottom: 2px;
+    padding: 0 auto;
+  }
+  .friendsBlock{
+    margin-top: 20px;
+    padding-top: 5px;
+    background: white;
+    width:inherit;
+    height: inherit;  
+
+  }
+  .friendsBlock h3{
+    font-size: 12px;
+    text-align: center;
+
+  }
+  .friends {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+    }

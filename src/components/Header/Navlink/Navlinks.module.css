@@ -1,0 +1,38 @@
+.nav{
+  width: 450px;
+  display: flex;
+  
+  
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-left: 7px;
+}
+.item{
+  padding-top: 10px;
+  text-align: center;
+  height: 100%;
+  width: 90px;
+}
+.nav a{
+  font-size: 12px;
+  font-weight:bold;
+  text-decoration: none;
+  color: #181818;
+  
+  
+}
+
+
+.nav a:hover{
+  transition: 0.3s;
+  color: #0275B1;
+  border-bottom: 2px solid #0275B1;
+}
+.nav a:hover img{
+  transition: 0.3s;
+  filter: brightness(0) saturate(100%) invert(29%) sepia(99%) saturate(665%) hue-rotate(163deg) brightness(105%) contrast(104%);
+}
+.icon imgs{
+  width: 24px;
+  height: 24px;
+}

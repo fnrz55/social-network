@@ -1,0 +1,35 @@
+
+  .profile{
+    width: 100%;
+    display: flex;
+    margin-right: 130px;
+    margin-left: 130px;
+  }
+  .background img{
+    height: 100px;
+    width: 100%;
+  }
+  .avatarPic img{
+  
+    height: 150px;
+    width: 150px;
+  }
+  .container{
+    display: flex;
+  }
+  .info{
+    margin-left: 35px;
+  }
+  .name{
+    font-size: 30px;
+    padding-top: 5px;
+    margin-bottom: 40px;
+  }
+  .descriptipon{
+    font-size: 20px;
+  }
+  .descriptipon p{
+    margin-top: 0px;
+    margin-bottom: 2px;
+    padding: 0 auto;
+  }

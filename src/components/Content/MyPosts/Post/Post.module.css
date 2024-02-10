@@ -1,0 +1,74 @@
+.item{
+  width: 850px;
+  background: white;
+}
+.container{
+  padding-left: 20px;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  margin-bottom: 10px;
+}
+.container img{
+  height: 70px;
+  border-radius: 50%;
+}
+.container p{
+ margin: auto 0;
+ padding-left: 30px;
+}
+.avatar img {
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+}
+.name{
+  padding-top: 12px;
+  font-weight: bold;
+  padding-left: 15px;
+  text-align: center;
+ 
+}
+.text{
+  padding-left: 30px;
+}
+.feedback{
+  width: 100%;
+  display: flex;
+}
+
+.feedback button{
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: inherit;
+}
+.feedback button:hover{
+  cursor: pointer;
+  background: #0275B1;
+  translate: 0.2s;
+
+}
+.feedback button:hover img{
+  translate: 0.2s;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(6%) saturate(0%) hue-rotate(115deg) brightness(108%) contrast(108%);
+}
+.feedback button:hover span{
+  color: white;
+  translate: 0.2s;
+
+}
+.likes{
+  height: 49px;
+  width: 9%;
+}
+.comment{
+  height: 49px;
+  width: 9%;
+}
+.feedback span{
+  font-size: 12px;
+  font-weight: 900;
+  margin-left: 5px;
+}
+
