@@ -1,11 +1,13 @@
 import { produce } from "immer"
 import { profileAPI } from "../API/api";
 import { usersAPI } from './../API/api';
+
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 const SET_MY_PROFILE = "SET_MY_PROFILE"
 const SET_FRIENDS="SET_FRIENDS"
+const SAVE_PHOTO_SUCCESS="SAVE_PHOTO_SUCCESS"
 
 
 const initialState = {
@@ -57,6 +59,11 @@ const profileReducer = (state = initialState, action) => {
                 draft.friends = action.friends
             })
 
+        case SAVE_PHOTO_SUCCESS:
+            return produce(state, draft => {
+                draft.userProfile.photos = action.photos
+            })
+
         default:
             return state;
     }
@@ -75,6 +82,8 @@ export const setMyProfile = (myProfile) => ({
 })
 
 export const setStatus = (status) => ({ type: SET_STATUS, status })
+
+export const setPhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
 
 export const setFriends=(friends)=>({type:SET_FRIENDS,friends})
 
@@ -110,6 +119,15 @@ export const getFriends=()=>{
         let responce=await usersAPI.getUsers();
         let friends=responce.filter(u=>u.followed===true)
         dispatch(setFriends(friends))
+    }
+}
+
+export const savePhoto=(file)=>{
+    return async (dispatch)=>{
+        let responce=await profileAPI.savePhoto(file);
+        if(responce.resultCode===0){
+            dispatch(setPhotoSuccess(responce.data.potos))
+        }
     }
 }
 

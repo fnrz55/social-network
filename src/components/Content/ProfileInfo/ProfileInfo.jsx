@@ -5,6 +5,7 @@ import ProfileStatus from './ProlileStatus'
 import ProfileStatusWithHooks from './ProlileStatusWithHooks';
 
 const ProfileInfo = (props) => {
+    console.log(props);
     let friendsElements = props.friends
         .map(friend => { return <Friend avatar={friend.photos.small} id={friend.id} name={friend.name} /> })
 
@@ -12,6 +13,11 @@ const ProfileInfo = (props) => {
         return <Preloader />
     }
 
+    const onProfilePicChange=(e)=>{
+        if(e.target.files.length){
+            props.savePhoto(e.target.files[0])
+        }
+    }
     return (
         <div className={c.profile} >
             <div className={c.backgroundCont}>
@@ -23,6 +29,7 @@ const ProfileInfo = (props) => {
                 </div>
             </div>
             <div className={c.container}>
+            {props.owner&&<input type="file" onChange={onProfilePicChange} />}
                 <div className={c.info}>
                     <div className={c.name}>
                         {props.userProfile.fullName}

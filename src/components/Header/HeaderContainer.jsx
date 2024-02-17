@@ -13,9 +13,7 @@ class HeaderContainerAPI extends React.Component{
     }
 
     componentDidUpdate(){
-        if(this.props.isAuth){
-            this.props.getMyProfile(this.props.userId)
-        }
+        
     }
     
     
@@ -30,7 +28,6 @@ render(){
 }
 
 const mapStateToProps=(state)=>{
-    
     return{
     isAuth:state.auth.isAuth,
     login:state.auth.login,

@@ -11,7 +11,7 @@ import { getFriends } from './../../redux/usersSelectors';
 
 class ProfileContainerAPI extends React.Component {
 
-    componentDidMount() {
+    refreshProfile(){
         let userId = this.props.router.params.userId
         if (!userId) {
             userId = this.props.id
@@ -24,9 +24,20 @@ class ProfileContainerAPI extends React.Component {
         this.props.getUsers(1,100)
     }
 
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.router.params.userId!=prevProps.router.params.userId){
+            this.refreshProfile();
+        }
+        
+    }
+
     render() {
         return (
-            <Content {...this.props} profile={this.props.profile} />
+            <Content {...this.props} owner={!this.props.router.params.userId} profile={this.props.profile} />
         )
     }
 }

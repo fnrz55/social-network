@@ -6,8 +6,8 @@ const Content = (props) => {
     
     return (
         <div className={c.profile} >
-            <MyPostsContainer />
-            <ProfileInfoContainer />
+            <MyPostsContainer  />
+            <ProfileInfoContainer owner={props.owner} />
         </div>
 
     )
