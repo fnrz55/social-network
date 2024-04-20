@@ -3,6 +3,9 @@ import { createSelector } from "reselect"
 export const getUsersFromState=(state)=>{
     return state.usersPage.users
 }
+export const getFriendsFromState=(state)=>{
+    return state.usersPage.friends
+}
 
 export const getPageSize=(state)=>{
     return state.usersPage.pageSize
@@ -10,6 +13,10 @@ export const getPageSize=(state)=>{
 
 export const getTotalUsersCount=(state)=>{
     return state.usersPage.totalUsersCount
+}
+
+export const getTotalFriendsCount=(state)=>{
+    return state.usersPage.totalFriendsCount
 }
 
 export const getCurrentPage=(state)=>{

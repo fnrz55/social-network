@@ -2,18 +2,23 @@ import { produce } from "immer"
 import { updateObjInArray } from "../utilits/validators/objectHelpers";
 import { followAPI, usersAPI } from './../API/api';
 
+
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const ADD = "ADD"
 const DELETE = "DELETE"
 const SET_USERS = "SET_USERS"
+const SET_FRIENDS = "SET_FRIENDS"
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT"
+const SET_TOTAL_FRIENDS_COUNT = "SET_TOTAL_FRIENDS_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING"
 
 let initialState = {
     users: [],
+    friends:[],
     pageSize: 5,
     totalUsersCount: 0,
+    totalFriendsCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
@@ -35,6 +40,10 @@ const usersReducer = (state = initialState, action) => {
             return produce(state, draft => {
                 draft.users = action.users
             })
+        case SET_FRIENDS:
+            return produce(state, draft => {
+                draft.friends = action.friends
+            })
 
         case SET_CURRENT_PAGE:
             return produce(state, draft => {
@@ -45,6 +54,10 @@ const usersReducer = (state = initialState, action) => {
             return produce(state, draft => {
                 draft.totalUsersCount = action.totalUsersCount
             })
+        case SET_TOTAL_FRIENDS_COUNT:
+            return produce(state, draft => {
+                draft.totalFriendsCount = action.totalFriendsCount
+            })
 
         case TOGGLE_IS_FETCHING:
             return produce(state, draft => {
@@ -54,7 +67,7 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING:
             return produce(state, draft => {
                 action.isFetching ? draft.followingInProgress.push(action.userId)
-                    : draft.followingInProgress = draft.followingInProgress.filter(id => id != action.userId)
+                    : draft.followingInProgress = draft.followingInProgress.filter(id => id !== action.userId)
             })
 
         default:
@@ -69,9 +82,13 @@ export const deleteSucces = (userId) => ({ type: DELETE, userId })
 
 export const setUsers = (users) => ({ type: SET_USERS, users })
 
+export const setFriends = (friends) => ({ type: SET_FRIENDS, friends })
+
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
 
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_COUNT, totalUsersCount })
+
+export const setTotalFriendsCount = (totalFriendsCount) => ({ type: SET_TOTAL_FRIENDS_COUNT, totalFriendsCount })
 
 export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 
@@ -84,6 +101,15 @@ export const getUsers = (currentPage, pageSize) => {
         dispatch(setUsers(data.items))
         dispatch(setIsFetching(false))
         dispatch(setTotalUsersCount(data.totalCount ))
+    }
+}
+export const getFriends = (currentPage, pageSize) => {
+    return async (dispatch) => {
+        dispatch(setIsFetching(true));
+        let data = await usersAPI.getFriends(currentPage, pageSize)
+        dispatch(setFriends(data.items))
+        dispatch(setIsFetching(false))
+        dispatch(setTotalFriendsCount(data.totalCount ))
     }
 }
 export const addUser = (id) => {

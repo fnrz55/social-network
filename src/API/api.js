@@ -16,6 +16,10 @@ export const usersAPI={
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response=>{
                 return response.data;
             })},
+    getFriends(currentPage=1,pageSize=5,friend=true) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=${friend}`).then(response=>{
+                return response.data;
+            })},
 }
 
 export const followAPI={
@@ -56,6 +60,11 @@ export const profileAPI={
          return responce.data
         })
      },
+     setProfile(profile){
+        return instance.put(`profile`,profile).then(responce=>{
+            return responce.data
+           })
+     },
      getStatus(id){
         return instance.get(`/profile/status/`+id).then(responce=>{
             return responce.data
@@ -74,7 +83,8 @@ export const profileAPI={
         }}).then(responce=>{
             return responce
         })
-     }
+     },
+
 
 }
 

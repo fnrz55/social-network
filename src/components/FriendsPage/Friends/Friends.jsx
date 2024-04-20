@@ -1,31 +1,40 @@
 import React from "react";
-import c from './Users.module.css'
-import User from './User/User';
+import c from './Friends.module.css'
+import Friend from './Friend/Friend';
 import { useState } from "react";
-import ni from './../../img/Users/chevron-right.svg'
-import pi from './../../img/Users/chevron-left.svg'
-import fi from './../../img/Users/first-page.png'
-import li from './../../img/Users/last-page.png'
+import ni from './../../../img/Users/chevron-right.svg'
+import pi from './../../../img/Users/chevron-left.svg'
+import fi from './../../../img/Users/first-page.png'
+import li from './../../../img/Users/last-page.png'
 
-const Users = (props) => {
+const Friends = (props) => {
     
+    return (
+        <div className={c.pageCont}>
+            <FriendsList {...props}/>
+        </div>
+    )
+}
+
+const FriendsList = (props) => {
+
     return (
         <div className={c.container}>
             <div className={c.title}>
-                <h3>CURRENT USERS OF THIS SITE</h3>
+                <h3>ALL FRIENDS {props.totalFriendsCount}</h3>
             </div>
-            <Pagination totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+            <Pagination totalFriendsCount={props.totalFriendsCount} pageSize={props.pageSize}
              currentPage={props.currentPage} onPageChanged={props.onPageChanged}
              portionSize={10}  />
-            {props.users.map(u =>
-                <User photos={u.photos}
+            {props.friends.map(u =>
+                <Friend photos={u.photos}
                     name={u.name} status={u.status} location={u.location}
                     added={u.followed} id={u.id} followingInProgress={props.followingInProgress}
                     addUser={props.addUser}
                     deleteUserThunk={props.deleteUserThunk} />)}
             <div className={c.getUsers}>
                 <button >
-                    GET USERS
+                    GET Friends
                 </button>
             </div>
         </div>
@@ -36,7 +45,7 @@ const Users = (props) => {
 }
 
 const Pagination=(props)=>{
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pagesCount = Math.ceil(props.totalFriendsCount / props.pageSize);
     let pages = [];
 
     for (let i = 0; i < pagesCount; i++) {
@@ -72,4 +81,4 @@ const Pagination=(props)=>{
     
 }
 
-export default Users
+export default Friends

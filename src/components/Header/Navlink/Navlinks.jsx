@@ -29,11 +29,11 @@ const Nav = (props) => {
         </NavLink>
       </div>
       <div className={c.item}>
-        <NavLink to="/users">
+        <NavLink to="/friends">
           <div className={c.icon}>
             <img src={mu} alt="" />
           </div>
-          Users
+          Friends
         </NavLink>
       </div>
       <div className={c.item}>

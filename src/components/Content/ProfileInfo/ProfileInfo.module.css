@@ -12,13 +12,18 @@
     height: 120px;
     width: 100%;
   }
+  .avatarHoverCont{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    height: 140px;
+    width: 100px;
+  }
   .avatarPic img{
-  position: absolute;
+  
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    top: 50%;
-    left: 30%;
   }
   .container{
     margin-top: 50px;
@@ -55,9 +60,46 @@
 
   }
   .friends {
-    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    
+    }
+  
+    .upload{
+      padding-left: 5px;
+      padding-top: 15px;
+      text-align: center;
+      border-radius: 10px;
+      position: absolute;
+      top: 105px;
+      
+      background: white;
+      border: 1px solid #000;
+      height: 40px;
+      width: 150px;
+    }
+    .upload label{
+      font-weight: 900;
+    }
+
+    .upload label:hover{
+      cursor: pointer;
+      background: #F4F4F4;
+    }
+    .upload input[type="file"]{
+      display: none;
+    }
+    .edit{ 
+      position: absolute;
+      top: 279px;
+      right: 435px;
+      background: inherit;
+      border: none;
+    }
+    .edit:hover{
+      cursor: pointer;
+    }
+    .edit img{
+      height: 17px;
+      width: 17px;
     }

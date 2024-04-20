@@ -8,6 +8,8 @@ const SET_STATUS = "SET_STATUS"
 const SET_MY_PROFILE = "SET_MY_PROFILE"
 const SET_FRIENDS="SET_FRIENDS"
 const SAVE_PHOTO_SUCCESS="SAVE_PHOTO_SUCCESS"
+const SET_PROFILE_SUCCESS="SET_PROFILE_SUCCESS"
+const SET_ERROR_MESSAGE="SET_ERROR_MESSAGE"
 
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
     userProfile: null,
     status: null,
     myProfile: null,
+    errorMessage: null,
 }
 
 
@@ -63,6 +66,15 @@ const profileReducer = (state = initialState, action) => {
             return produce(state, draft => {
                 draft.userProfile.photos = action.photos
             })
+        
+        case SET_PROFILE_SUCCESS:
+            return produce(state, draft => {
+                draft.userProfile = action.userProfile
+            })
+        case SET_ERROR_MESSAGE:
+            return produce(state, draft => {
+                draft.errorMessage = action.errorMessage
+            })
 
         default:
             return state;
@@ -77,9 +89,18 @@ export const setUserProfile = (userProfile) => ({
     type: SET_USER_PROFILE, userProfile
 })
 
+export const setErrorMessage = (ErrorMessage) => ({
+    type: SET_ERROR_MESSAGE, ErrorMessage
+})
+
 export const setMyProfile = (myProfile) => ({
     type: SET_MY_PROFILE, myProfile
 })
+
+export const setProfile = (profile) => ({
+    type: SET_PROFILE_SUCCESS, profile
+})
+
 
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
@@ -130,5 +151,20 @@ export const savePhoto=(file)=>{
         }
     }
 }
+
+export const saveProfile=(profile)=>{
+    return async (dispatch,getState)=>{
+        let id=getState().auth.userId
+        let responce=await profileAPI.setProfile(profile);
+        if(responce.resultCode===0){
+            dispatch(getProfile(id))
+        }
+        else{
+            let errorMessage = responce.messages[0].length > 0 ? responce.messages[0] : 'Some unknown error'
+            dispatch(setErrorMessage(errorMessage))
+        }
+    }
+}
+
 
 export default profileReducer;

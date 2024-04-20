@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import './App.css';
 import { Routes, Route} from "react-router-dom";
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from './components/FriendsPage/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -11,8 +11,10 @@ import { getMyProfile } from './redux/profileReducer';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { withRouter } from './HOC/withRouter';
-
+import FriendsContainer from './components/FriendsPage/Friends/FriendsContainer';
+import FriendsPage from './components/FriendsPage/FriendsPage';
 const ProfileContainer=React.lazy(()=>import('./components/Content/ProfileContainer')) ;
+
 
 class  App extends React.Component{
 
@@ -37,7 +39,8 @@ render(){
           <Route path="/dialogs/*"element= {<DialogsContainer  />}/> 
           <Route path="/profile/:userId?" element={<ProfileContainer />}/>
           <Route path="/profile/" element={<ProfileContainer />}/>
-          <Route path="/users" element={<UsersContainer />}/>
+          <Route path="/friends" element={<FriendsPage/>}/>
+
           <Route path="/login" element={<Login />}/>
         </Routes>
       </div>

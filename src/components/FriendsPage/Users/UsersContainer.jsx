@@ -1,25 +1,22 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { setCurrentPage, getUsers, addUser, deleteUserThunk }
-from './../../redux/usersReducer';
+from './../../../redux/usersReducer';
 import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
-import { withAurhRedirect } from './../../HOC/withAurhRedirect';
+import Preloader from "../../common/Preloader/Preloader";
+import { withAurhRedirect } from './../../../HOC/withAurhRedirect';
 import { compose } from "redux";
-import { getUsersFromState, getPageSize, getCurrentPage, getTotalUsersCount, getIsFetching, getFollowingInProgress } from "../../redux/usersSelectors";
+import {  getUsersFromState, getPageSize, getCurrentPage, getTotalUsersCount, getIsFetching, getFollowingInProgress } from "../../../redux/usersSelectors";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
-
-
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, this.props.pageSize);
-
     }
 
     render() {
