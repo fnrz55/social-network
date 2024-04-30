@@ -1,8 +1,10 @@
 import { produce } from "immer"
 import { authAPI } from "../API/api"
+import { securityAPI } from './../API/api';
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE"
+const SET_CAPTCHA_URL = "SET_CAPTCHA_URL"
 
 const initialState = {
     userId: null,
@@ -11,6 +13,7 @@ const initialState = {
     isFetching: false,
     isAuth: false,
     errorMessage: null,
+    captchaUrl:null,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -29,6 +32,11 @@ const authReducer = (state = initialState, action) => {
                 draft.errorMessage = action.errorMessage
             })
 
+        case SET_CAPTCHA_URL:
+            return produce(state, draft => {
+                draft.captchaUrl = action.captchaUrl
+            })
+
         default:
             return state
     }
@@ -37,6 +45,12 @@ const authReducer = (state = initialState, action) => {
 export const setUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })
 
 export const setErrorMessage = (errorMessage) => ({ type: SET_ERROR_MESSAGE, errorMessage })
+
+export const getCaptcha=(url)=>({
+    type: SET_CAPTCHA_URL,
+    captchaUrl:url,
+})
+
 
 export const getUserAuth = () => async (dispatch) => {
     let data = await authAPI.setUserAuthData()
@@ -48,17 +62,28 @@ export const getUserAuth = () => async (dispatch) => {
 
 }
 
-export const setLogin = (email, password, rememberMe) => {
+export const setLogin = (email, password, rememberMe,captcha) => {
     return async (dispatch) => {
-        let responce = await authAPI.login(email, password, rememberMe)
+        let responce = await authAPI.login(email, password, rememberMe,captcha)
         if (responce.resultCode == 0) {
             console.log('Success');
             dispatch(getUserAuth())
-        }
-        else {
+        } else{
+            if(responce.resultCode===10){
+                dispatch(getCaptchaUrl())
+            }
             let errorMessage = responce.messages.length > 0 ? responce.messages[0] : 'Some unknown error'
             dispatch(setErrorMessage(errorMessage))
         }
+        
+    }
+}
+
+
+export const getCaptchaUrl=()=>{
+    return async (dispatch)=>{
+        let responce=await securityAPI.getCaptchaUrl()
+        dispatch( getCaptcha(responce))
     }
 }
 

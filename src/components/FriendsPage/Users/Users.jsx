@@ -19,11 +19,12 @@ const Users = (props) => {
              portionSize={10}  />
             <div className={c.usersWrapper}>
             {props.users.map(u =>
+                <div className={c.user}>
                 <User photos={u.photos}
                     name={u.name} status={u.status} location={u.location}
                     added={u.followed} id={u.id} followingInProgress={props.followingInProgress}
                     addUser={props.addUser}
-                    deleteUserThunk={props.deleteUserThunk} />)}
+                    deleteUserThunk={props.deleteUserThunk} /></div>)}
             </div>
             <div className={c.getUsers}>
                 <button >

@@ -17,7 +17,7 @@ const Login = (props) => {
     })
 
     const onSubmit = (data) => {
-        props.setLogin(data.login,data.password,data.remembered)
+        props.setLogin(data.login,data.password,data.remembered,data.captcha)
         
         // if(props.errorMessage){
         //     setError("wrongLogin",{
@@ -69,8 +69,12 @@ const Login = (props) => {
                     <span> Remember me</span>
                 </div>
                 <div className={c.error}>
+                    <div></div>
                 {props.errorMessage&&<p>{props.errorMessage}</p>}
                 </div>
+                {props.captchaUrl&& <div><img src={props.captchaUrl} alt=""/>
+                    <input type="text" {...register('captcha',{required:'Enter captcha'})} />
+                    </div>}
                 <input type="submit" disabled={!isValid} />
             </form>
 
@@ -82,6 +86,7 @@ const Login = (props) => {
 const mapStateToProps=(state)=>({
     isAuth:state.auth.isAuth,
     errorMessage:state.auth.errorMessage,
+    captchaUrl:state.auth.captchaUrl,
 })
 
 export default connect(mapStateToProps, { setLogin,getUserAuth })(Login)

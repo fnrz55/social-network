@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import './App.css';
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import UsersContainer from './components/FriendsPage/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
@@ -38,6 +38,7 @@ render(){
         <Routes>
           <Route path="/dialogs/*"element= {<DialogsContainer  />}/> 
           <Route path="/profile/:userId?" element={<ProfileContainer />}/>
+          <Route path="/" element={<Navigate to={'/profile'}/>}/>
           <Route path="/profile/" element={<ProfileContainer />}/>
           <Route path="/friends" element={<FriendsPage/>}/>
 

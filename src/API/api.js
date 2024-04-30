@@ -10,6 +10,13 @@ const instance=axios.create({
     },
     baseURL:"https://social-network.samuraijs.com/api/1.0/"
 })
+export const securityAPI={
+    getCaptchaUrl(){
+        return instance.get('security/get-captcha-url').then(responce=>{
+            return responce.data.url;
+        })
+    },
+}
 
 export const usersAPI={
     getUsers(currentPage=1,pageSize=5) {
@@ -41,9 +48,9 @@ export const authAPI={
             return responce.data
         })
     },
-    login(email,password,rememberMe=false){
+    login(email,password,rememberMe=false,captcha=null){
         return instance.post('/auth/login',{
-            email,password,rememberMe
+            email,password,rememberMe,captcha
         }).then(responce=>{
             return responce.data
         })

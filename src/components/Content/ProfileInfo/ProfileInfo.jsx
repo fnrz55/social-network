@@ -5,11 +5,12 @@ import ProfileStatusWithHooks from './ProlileStatusWithHooks';
 import { useState } from 'react';
 import ProfileForm from './ProfileForm';
 import set from '../../../img/Profile/settings-icon-2048x2046-cw28eevx.png'
+
+
 const ProfileInfo = (props) => {
 
     const [editMode, setEditMode] = useState(false)
     const [showChangeMenu, setShowChangeMenu] = useState(false)
-
 
     const handleRedactProfile = () => {
         setEditMode(!editMode)
@@ -68,11 +69,10 @@ const ProfileInfo = (props) => {
     )
 }
 
-
 export const ProfileDescription = ({ userProfile, updateStatus,
     status, isOwner,
     handleRedactProfile }) => {
-    return (<div>
+    return (<div className={c.descriptionWrapper}>
         {isOwner && <button className={c.edit} onClick={handleRedactProfile}><img src={set} alt="" /></button>}
         {status && <ProfileStatusWithHooks updateStatus={updateStatus} status={status} />}
         {userProfile.aboutMe && <p><span>Description: </span> {userProfile.aboutMe}</p>}
@@ -82,10 +82,6 @@ export const ProfileDescription = ({ userProfile, updateStatus,
     </div>
     )
 }
-
-
-
-
 
 
 export default ProfileInfo

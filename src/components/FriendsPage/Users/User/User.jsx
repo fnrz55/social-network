@@ -21,7 +21,6 @@ const User = (props) => {
                     <img src={props.photos.small != null ? props.photos.small : "https://i.pinimg.com/564x/06/a0/59/06a059e6ef315c59c3eb07dfb54e27d2.jpg"} alt="" />
                 </NavLink>
             </div>
-
             <div className={c.info}>
                 <div className={c.main}>
                     <div className={c.name}>
@@ -40,9 +39,7 @@ const User = (props) => {
                     </div>
                 </div>
             </div>
-
         </div>
-
     )
 }
 
